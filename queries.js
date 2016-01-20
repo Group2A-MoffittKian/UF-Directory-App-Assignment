@@ -6,11 +6,13 @@ var findLibraryWest = function() {
 	});
 };
 var removeCable = function() {
-  /*
-    Find the document with the code 'CABL'. This cooresponds with courses that can only be viewed 
-    on cable TV. Since we live in the 21st century and most courses are now web based, go ahead
-    and remove this listing from your database and log the document to the console. 
-   */
+  	Listing.findOne({ code: 'CABL' }, function(err, listing) {
+	   if (err) throw err;
+	   console.log(listing);
+	   listing.remove(function(err) {
+		if (err) throw err;
+	   });
+	});
 };
 var updatePhelpsMemorial = function() {
   /*
