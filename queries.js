@@ -1,10 +1,9 @@
 /* Fill out these functions using Mongoose queries*/
-
 var findLibraryWest = function() {
-  /* 
-    Find the document that contains data corresponding to Library West,
-    then log it to the console. 
-   */
+	Listing.find({ name: 'Library West' }, function(err, listing) {
+	   if (err) throw err;
+	   console.log(listing);
+	});
 };
 var removeCable = function() {
   /*
@@ -20,11 +19,18 @@ var updatePhelpsMemorial = function() {
    */
 };
 var retrieveAllListings = function() {
-  /* 
-    Retrieve all listings in the database, and log them to the console. 
-   */
+  Listing.find({}, function(err, listings) {
+	   if (err) throw err;
+	   console.log(listings);
+  });
 };
-
+var fs = require('fs'),
+    mongoose = require('mongoose'), 
+    Schema = mongoose.Schema, 
+    Listing = require('./ListingSchema.js'), 
+    config = require('./config.js'),
+    listingData= require('./Listings.json');
+mongoose.connect(config.db.uri);
 findLibraryWest();
 removeCable();
 updatePhelpsMemorial();
