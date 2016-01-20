@@ -6,10 +6,10 @@ var mongoose = require('mongoose'),
 var listingSchema = new Schema({
   code: {type:String, required: true, unique: true},
   name: {type:String, required: true },
-  coordinates: [{
+  coordinates: {
 	latitude: Number,
 	longitude: Number
-  }],
+  },
   address: String,
 });
 
