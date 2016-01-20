@@ -8,17 +8,19 @@ var findLibraryWest = function() {
 var removeCable = function() {
   	Listing.findOne({ code: 'CABL' }, function(err, listing) {
 	   if (err) throw err;
-	   console.log(listing);
-	   listing.remove(function(err) {
-		if (err) throw err;
-	   });
+	   if (listing!==null){
+		console.log(listing);
+	   	listing.remove(function(err) {
+			if (err) throw err;
+	  	 });
+	   }
+	   else{
+		console.log('Already removed!');
+	   }
 	});
 };
 var updatePhelpsMemorial = function() {
-	Listing.findOneAndUpdate({ name: 'Phelps Laboratory' }, { address: '100 Phelps Lab, P.O. Box 116350 Gainesville, FL  32611' }, function(err, listing) {
-	   if (err) throw err;
-	});
-	Listing.findOne({ name: 'Phelps Laboratory' }, function(err, listing) {
+	Listing.findOneAndUpdate({ name: 'Phelps Laboratory' }, { address: '100 Phelps Lab, P.O. Box 116350 Gainesville, FL  32611' }, {new: true}, function(err, listing){
 	   if (err) throw err;
 	   console.log(listing);
 	});
@@ -35,7 +37,6 @@ var fs = require('fs'),
     Listing = require('./ListingSchema.js'), 
     config = require('./config.js');
 mongoose.connect(config.db.uri);
-findLibraryWest();
-removeCable();
 updatePhelpsMemorial();
-retrieveAllListings();
+removeCable();
+findLibraryWest();
